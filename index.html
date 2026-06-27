@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#172b1c" />
+    <title>Деревня Ольховка</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game" aria-label="Pixel MMORPG"></canvas>
+      <div class="mobile-controls" aria-label="Сенсорное управление">
+        <div class="dpad">
+          <button class="pad up" data-hold="up" aria-label="Вверх">▲</button>
+          <button class="pad left" data-hold="left" aria-label="Влево">◀</button>
+          <button class="pad right" data-hold="right" aria-label="Вправо">▶</button>
+          <button class="pad down" data-hold="down" aria-label="Вниз">▼</button>
+        </div>
+        <div class="actions">
+          <button class="action" data-tap="interact" aria-label="Говорить">E</button>
+          <button class="action attack" data-tap="attack" aria-label="Атака">Space</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
