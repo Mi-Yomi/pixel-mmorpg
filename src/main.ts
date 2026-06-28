@@ -783,7 +783,26 @@ class Game {
     ctx.ellipse(npc.x, npc.y + 16, 18, 8, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.drawImage(this.images[npc.sprite], npc.x - 26, npc.y - 48, 52, 56);
+    this.drawNpcLabel(npc);
     if (dist(this.player, npc) < 68 && !this.dialogue) this.drawBubble(npc.x, npc.y - 54, 'E');
+  }
+
+  private drawNpcLabel(npc: Npc): void {
+    const ctx = this.ctx;
+    const text = `${npc.name} — ${npc.title}`;
+    const x = npc.x;
+    const y = npc.y - 82;
+    ctx.save();
+    ctx.font = '700 13px system-ui';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const w = Math.ceil(ctx.measureText(text).width) + 18;
+    roundedRect(ctx, x - w / 2, y - 11, w, 22, 11);
+    ctx.fillStyle = 'rgba(18, 24, 22, 0.78)';
+    ctx.fill();
+    ctx.fillStyle = '#fff0c8';
+    ctx.fillText(text, x, y);
+    ctx.restore();
   }
 
   private drawSlime(slime: Slime): void {
