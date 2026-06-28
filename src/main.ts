@@ -40,6 +40,8 @@ interface Player {
   gold: number;
   speed: number;
   facing: Vec;
+  moving: boolean;
+  animTimer: number;
   attackCd: number;
 }
 
@@ -183,6 +185,8 @@ class Game {
     gold: 0,
     speed: 176,
     facing: { x: 0, y: 1 },
+    moving: false,
+    animTimer: 0,
     attackCd: 0,
   };
   private quest: QuestState = {
@@ -336,8 +340,13 @@ class Game {
     if (this.keys.has('KeyA') || this.keys.has('ArrowLeft') || this.touch.has('left')) move.x -= 1;
     if (this.keys.has('KeyD') || this.keys.has('ArrowRight') || this.touch.has('right')) move.x += 1;
     const length = Math.hypot(move.x, move.y);
-    if (length === 0 || this.dialogue) return;
+    this.player.moving = length > 0 && !this.dialogue;
+    if (!this.player.moving) {
+      this.player.animTimer = 0;
+      return;
+    }
 
+    this.player.animTimer += dt;
     move.x /= length;
     move.y /= length;
     this.player.facing = { ...move };
@@ -805,7 +814,17 @@ class Game {
     ctx.beginPath();
     ctx.ellipse(this.player.x, this.player.y + 16, 19, 8, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.drawImage(this.images.playerSprite, this.player.x - 25, this.player.y - 50, 50, 58);
+
+    const bob = this.player.moving ? Math.sin(this.player.animTimer * 8) * 3 : 0;
+    ctx.save();
+    if (this.player.facing.x < 0) {
+      ctx.scale(-1, 1);
+      ctx.drawImage(this.images.playerSprite, -this.player.x - 25, this.player.y - 50 + bob, 50, 58);
+    } else {
+      ctx.drawImage(this.images.playerSprite, this.player.x - 25, this.player.y - 50 + bob, 50, 58);
+    }
+    ctx.restore();
+
     if (attacking) {
       ctx.strokeStyle = this.quest.rewarded ? '#d7d0a8' : '#f2df9b';
       ctx.lineWidth = 4;
