@@ -1,10 +1,12 @@
 {
-  "player_sheet.png": "/root/MyAi/pixel-mmorpg/public/assets/generated/player_sheet.png",
-  "npc_sheet.png": "/root/MyAi/pixel-mmorpg/public/assets/generated/npc_sheet.png",
-  "slime_sheet.png": "/root/MyAi/pixel-mmorpg/public/assets/generated/slime_sheet.png",
-  "tileset_generated.png": "/root/MyAi/pixel-mmorpg/public/assets/generated/tileset_generated.png",
-  "player_preview.png": "/root/MyAi/pixel-mmorpg/public/assets/generated/player_preview.png",
-  "elder_portrait.png": "/root/MyAi/pixel-mmorpg/public/assets/generated/elder_portrait.png",
-  "merchant_portrait.png": "/root/MyAi/pixel-mmorpg/public/assets/generated/merchant_portrait.png",
-  "slime_preview.png": "/root/MyAi/pixel-mmorpg/public/assets/generated/slime_preview.png"
+  "clean_player.png": "assets/generated/clean_player.png",
+  "clean_elder.png": "assets/generated/clean_elder.png",
+  "clean_merchant.png": "assets/generated/clean_merchant.png",
+  "clean_slime.png": "assets/generated/clean_slime.png",
+  "elder_portrait.png": "assets/generated/elder_portrait.png",
+  "merchant_portrait.png": "assets/generated/merchant_portrait.png",
+  "tileset_generated.png": "assets/generated/tileset_generated.png",
+  "legacy_player_sheet.png": "assets/generated/player_sheet.png",
+  "legacy_npc_sheet.png": "assets/generated/npc_sheet.png",
+  "legacy_slime_sheet.png": "assets/generated/slime_sheet.png"
 }

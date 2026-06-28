@@ -7,13 +7,12 @@ const SAVE_KEY = 'pixel-mmorpg-save-v1';
 const ASSET_BASE = `${import.meta.env.BASE_URL}assets/generated/`;
 
 const imageFiles = {
-  playerSheet: 'player_sheet.png',
-  playerPreview: 'player_preview.png',
-  npcSheet: 'npc_sheet.png',
+  playerSprite: 'clean_player.png',
+  elderSprite: 'clean_elder.png',
+  merchantSprite: 'clean_merchant.png',
   elderPortrait: 'elder_portrait.png',
   merchantPortrait: 'merchant_portrait.png',
-  slimeSheet: 'slime_sheet.png',
-  slimePreview: 'slime_preview.png',
+  slimeSprite: 'clean_slime.png',
   tileset: 'tileset_generated.png',
 } as const;
 
@@ -65,6 +64,7 @@ interface Npc {
   x: number;
   y: number;
   portrait: ImageKey;
+  sprite: ImageKey;
   frame: number;
 }
 
@@ -205,6 +205,7 @@ class Game {
       x: 432,
       y: 468,
       portrait: 'elderPortrait',
+      sprite: 'elderSprite',
       frame: 0,
     },
     {
@@ -214,6 +215,7 @@ class Game {
       x: 640,
       y: 570,
       portrait: 'merchantPortrait',
+      sprite: 'merchantSprite',
       frame: 1,
     },
   ];
@@ -771,8 +773,7 @@ class Game {
     ctx.beginPath();
     ctx.ellipse(npc.x, npc.y + 16, 18, 8, 0, 0, Math.PI * 2);
     ctx.fill();
-    const sx = npc.frame * 128;
-    ctx.drawImage(this.images.npcSheet, sx, 0, 128, 128, npc.x - 23, npc.y - 38, 46, 46);
+    ctx.drawImage(this.images[npc.sprite], npc.x - 26, npc.y - 48, 52, 56);
     if (dist(this.player, npc) < 68 && !this.dialogue) this.drawBubble(npc.x, npc.y - 54, 'E');
   }
 
@@ -786,7 +787,7 @@ class Game {
       ctx.globalAlpha = 0.75;
       ctx.filter = 'brightness(1.8)';
     }
-    ctx.drawImage(this.images.slimeSheet, 0, 0, 181, 181, slime.x - 21, slime.y - 24, 42, 42);
+    ctx.drawImage(this.images.slimeSprite, slime.x - 24, slime.y - 30, 48, 48);
     ctx.filter = 'none';
     ctx.globalAlpha = 1;
     if (slime.hp < slime.maxHp) {
@@ -804,7 +805,7 @@ class Game {
     ctx.beginPath();
     ctx.ellipse(this.player.x, this.player.y + 16, 19, 8, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.drawImage(this.images.playerSheet, 0, 0, 209, 209, this.player.x - 24, this.player.y - 41, 48, 52);
+    ctx.drawImage(this.images.playerSprite, this.player.x - 25, this.player.y - 50, 50, 58);
     if (attacking) {
       ctx.strokeStyle = this.quest.rewarded ? '#d7d0a8' : '#f2df9b';
       ctx.lineWidth = 4;
@@ -834,7 +835,7 @@ class Game {
     ctx.save();
     ctx.font = '14px system-ui';
     this.panel(16, 14, 292, 88);
-    ctx.drawImage(this.images.playerPreview, 28, 28, 48, 48);
+    ctx.drawImage(this.images.playerSprite, 28, 26, 48, 54);
     ctx.fillStyle = '#fff1d0';
     ctx.font = '800 16px system-ui';
     ctx.fillText('Деревня Ольховка', 88, 38);
@@ -857,7 +858,7 @@ class Game {
       ctx.fillText('Задание', this.width - questW, 39);
       ctx.font = '13px system-ui';
       this.wrapText(this.questText(), this.width - questW, 60, questW - 28, 17);
-      ctx.drawImage(this.images.slimePreview, this.width - 62, 30, 32, 32);
+      ctx.drawImage(this.images.slimeSprite, this.width - 66, 26, 40, 40);
     }
 
     const invY = this.height - 76;
